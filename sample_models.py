@@ -100,10 +100,11 @@ def deep_rnn_model(input_dim, units, recur_layers, output_dim=29):
     # TODO: Add recurrent layers, each with batch normalization
     rnn = input_data
     for i in range(recur_layers):
-        if i == recur_layers:
-            rnn = GRU(units, return_sequences=True, name='gru_' + str(i))(rnn)
-        else:
-            rnn = GRU(units, return_sequences=False, name='gru_' + str(i))(rnn)
+        # if i == recur_layers:
+            # rnn = GRU(units, return_sequences=True, name='gru_' + str(i))(rnn)
+        # else:
+            # rnn = GRU(units, return_sequences=False, name='gru_' + str(i))(rnn)
+        rnn = GRU(units, return_sequences=True, name='gru_' + str(i))(rnn)
         rnn = BatchNormalization(name='norm_' + str(i))(rnn)
     # TODO: Add a TimeDistributed(Dense(output_dim)) layer
     time_dense = TimeDistributed(Dense(output_dim))(rnn)
